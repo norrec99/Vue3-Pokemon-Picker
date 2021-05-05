@@ -4,6 +4,14 @@
     type="text" placeholder="Enter Pokemon here"
     class="mt-10 p-2 border-blue-500 border-2" v-model="text">
   </div>
+  <div class="w-full flex justify-center">
+    <router-link :to="`/about/${randNum}`">
+      <button 
+        class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 mt-5 h-10">
+        Random Pokemon
+      </button>
+    </router-link>
+  </div>
   <div class="mt-10 p-4 flex flex-wrap justify-center">
     <div 
       class="ml-4 text-2x text-blue-500"
@@ -30,8 +38,14 @@ export default {
       pokemons: [],
       urlIdLookup: {},
       text: "",
-      filteredPokemon:computed(() => updatePokemon())
+      num: 19,
+      filteredPokemon:computed(() => updatePokemon()),
+      randNum:computed(() => randomNumber())
     })
+
+    function randomNumber() {
+      return Math.floor(Math.random() * state.num + 1)
+    }
 
     function updatePokemon() {
       if(!state.text) {
@@ -51,6 +65,6 @@ export default {
         ,{})
       })
       return {...toRefs(state)}
-  }
+  },
 };
 </script>
