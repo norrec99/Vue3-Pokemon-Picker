@@ -8,7 +8,7 @@
     <router-link :to="`/about/${randNum}`">
       <button 
         class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 mt-5 h-10">
-        Random Pokemon
+        Random 1st Gen Pokemon
       </button>
     </router-link>
   </div>
@@ -38,7 +38,7 @@ export default {
       pokemons: [],
       urlIdLookup: {},
       text: "",
-      num: 19,
+      num: 151,
       filteredPokemon:computed(() => updatePokemon()),
       randNum:computed(() => randomNumber())
     })
@@ -55,7 +55,7 @@ export default {
         pokemon.name.includes(state.text))
     }
 
-    fetch("https://pokeapi.co/api/v2/pokemon/?offset=0")
+    fetch(`https://pokeapi.co/api/v2/pokemon/?offset=0&limit=${state.num}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
