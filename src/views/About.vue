@@ -4,6 +4,9 @@
       v-if="pokemon"
       class="w-3/12 m-auto bg-purple-100 mt-4 shadow-2xl flex justify-center flex-col items-center"
     >
+      <router-link class="z-0 text-4xl text-yellow-700 hover:shadow" to="/"
+        >x</router-link
+      >
       <h3 v-if="isTrue" class="text-2xl text-green-900 uppercase">
         {{ pokemon.name }}
       </h3>
