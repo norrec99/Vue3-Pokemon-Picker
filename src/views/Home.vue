@@ -7,10 +7,13 @@
       v-model="text"
     />
   </div>
+
+  <h1 class="w-full flex justify-center mt-5">Or...</h1>
+
   <div class="w-full flex justify-center">
     <router-link :to="`/about/${randNum}`">
       <button
-        class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 mt-5 h-10"
+        class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 p-2 mt-5 h-10"
       >
         Random 1st Gen Pokemon
       </button>

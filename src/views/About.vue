@@ -35,7 +35,7 @@
     </div>
     <div class="w-full flex justify-center">
       <button
-        class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 mt-5 h-10"
+        class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 px-14 mt-5 h-10"
         @click="getName"
       >
         Just tell me!
@@ -60,8 +60,7 @@ export default {
       isTrue: computed(() => isEqual()),
       getName: computed(() => giveMeName()),
     });
-    // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/51.png
-    // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/51.png
+
     function isEqual() {
       if (state.text !== state.pokemonName) {
         return false;
@@ -95,7 +94,7 @@ export default {
         state.pokemon = data;
         state.pokemonName = data.name;
         state.pokemonSprites = data.sprites;
-        console.log(state.pokemon);
+        // console.log(state.pokemon);
       });
     return { ...toRefs(state), flipLefPokemon, flipRightPokemon };
   },
