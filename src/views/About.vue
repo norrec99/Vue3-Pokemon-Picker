@@ -12,8 +12,8 @@
       </h3>
       <h3 v-else class="text-2xl text-green-900">??</h3>
       <div class="flex justify-center">
-        <img class="w-48" :src="pokemon.sprites.front_shiny" alt="" />
-        <img class="w-48" :src="pokemon.sprites.back_shiny" alt="" />
+        <img @click="flipLefPokemon" class="w-48" :src="src1" alt="" />
+        <img @click="flipRightPokemon" class="w-48" :src="src2" alt="" />
       </div>
       <h3 class="text-yellow-400">Types</h3>
       <div v-for="(type, idx) in pokemon.types" :key="idx">
@@ -53,11 +53,15 @@ export default {
     const state = reactive({
       pokemon: null,
       pokemonName: [],
+      pokemonSprites: [],
       text: "",
+      src1: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${route.params.slug}.png`,
+      src2: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${route.params.slug}.png`,
       isTrue: computed(() => isEqual()),
       getName: computed(() => giveMeName()),
     });
-
+    // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/51.png
+    // https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/51.png
     function isEqual() {
       if (state.text !== state.pokemonName) {
         return false;
@@ -69,14 +73,31 @@ export default {
       return (state.text = state.pokemonName);
     }
 
+    function flipLefPokemon() {
+      if (state.src1 === state.pokemonSprites.front_shiny) {
+        state.src1 = state.pokemonSprites.back_shiny;
+      } else {
+        state.src1 = state.pokemonSprites.front_shiny;
+      }
+    }
+    function flipRightPokemon() {
+      if (state.src2 === state.pokemonSprites.front_shiny) {
+        state.src2 = state.pokemonSprites.back_shiny;
+      } else {
+        state.src2 = state.pokemonSprites.front_shiny;
+      }
+    }
+
     fetch(`https://pokeapi.co/api/v2/pokemon/${route.params.slug}`)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
         state.pokemon = data;
         state.pokemonName = data.name;
+        state.pokemonSprites = data.sprites;
+        console.log(state.pokemon);
       });
-    return { ...toRefs(state) };
+    return { ...toRefs(state), flipLefPokemon, flipRightPokemon };
   },
 };
 </script>
